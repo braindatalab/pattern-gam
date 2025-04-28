@@ -30,21 +30,6 @@ NUM_TARGET_DEPENDENT_LATENTS_SUPPRESSORS = 0
 def random_orthogonal_matrix(
     size: int, rng: Generator, tolerance: float = 1e-6
 ) -> np.ndarray:
-    """
-    % M = RANDORTHMAT(n)
-    % generates a random n x n orthogonal real matrix.
-    %
-    % M = RANDORTHMAT(n,tol)
-    % explicitly specifies a thresh value that measures linear dependence
-    % of a newly formed column with the existing columns. Defaults to 1e-6.
-    %
-    % In this version the generated matrix distribution *is* uniform over the manifold
-    % O(n) w.r.t. the induced R^(n^2) Lebesgue measure, at a slight computational
-    % overhead (randn + normalization, as opposed to rand ).
-    %
-    % (c) Ofek Shilon , 2006.
-    """
-
     M = np.zeros(shape=(size, size))
     vi = rng.normal(size=(size,))
 
@@ -496,7 +481,7 @@ seeds = [2025]
 # of the form [informative,suppressor,uninformative]
 # feature_configs = [[3,0,7],[3,3,4],[3,7,0],[3,0,17],[3,8,9],[3,17,0]]
 
-feature_configs = [[3,3,4]]
+feature_configs = [[3,3,4],[3,0,7],[3,7,0]]
 thresholds = [0.2,0.3,0.4,0.5]
 
 for i,seed in enumerate(seeds):
@@ -623,5 +608,3 @@ for i,seed in enumerate(seeds):
             # g.fig.suptitle("Pairwise Feature Plot\n(Shaded Background = Feature Type)", y=1.18, fontsize=15)
             g.savefig(f"./figures/nls_i{inf}s{sup}u{uninf}_{i}_{threshold}_pairplot.png", bbox_inches="tight")
             g.savefig(f"./figures/nls_i{inf}s{sup}u{uninf}_{i}_{threshold}_pairplot_hires.png", dpi=300, bbox_inches="tight")
-
-            # plt.show()
