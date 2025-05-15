@@ -45,7 +45,8 @@ class NAMBase:
         num_learners: int = 1,
         n_jobs: int = None,
         warm_start: bool = False,
-        random_state: int = 42
+        random_state: int = 42,
+        activation: str = 'exu',
     ) -> None:
         self.interaction_pairs = interaction_pairs
         self.units_multiplier = units_multiplier
@@ -73,6 +74,7 @@ class NAMBase:
         self.n_jobs = n_jobs
         self.warm_start = warm_start
         self.random_state = random_state
+        self.activation = activation
 
         self._best_checkpoint_suffix = 'best'
         self._fitted = False
@@ -93,7 +95,8 @@ class NAMBase:
                 dropout=self.dropout,
                 feature_dropout=self.feature_dropout,
                 hidden_sizes=self.hidden_sizes,
-                interaction_pairs=self.interaction_pairs
+                interaction_pairs=self.interaction_pairs,
+                activation=self.activation,
                 )
             self.models.append(model)
 
@@ -252,7 +255,8 @@ class NAMClassifier(NAMBase):
         num_learners: int = 1,
         n_jobs: int = None,
         warm_start: bool = False,
-        random_state: int = 42
+        random_state: int = 42,
+        activation: str = 'exu',
     ) -> None:
         super(NAMClassifier, self).__init__(
             interaction_pairs = interaction_pairs,
@@ -280,7 +284,8 @@ class NAMClassifier(NAMBase):
             num_learners=num_learners,
             n_jobs=n_jobs,
             warm_start = warm_start,
-            random_state=random_state
+            random_state=random_state,
+            activation=activation
         )
         self.regression = False
 

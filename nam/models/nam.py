@@ -55,7 +55,8 @@ class NAM(torch.nn.Module):
                 input_shape=2,
                 num_units=self.num_units[min(i, j)],  # can tweak this
                 dropout=self.dropout,
-                hidden_sizes=self.hidden_sizes
+                hidden_sizes=self.hidden_sizes,
+                activation=self.activation
             )
 
 
