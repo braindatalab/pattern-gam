@@ -182,7 +182,7 @@ class Trainer:
 
         self.models[:] = Parallel(n_jobs=self.n_jobs)(
             delayed(self.train_learner)(i, train_ind, val_ind)
-            for i, (train_ind, val_ind) in enumerate(ss.split(self.dataset.X, self.dataset.y)))
+            for i, (train_ind, val_ind) in enumerate(ss.split(self.dataset.X.cpu().detach().numpy(), self.dataset.y.cpu().detach().numpy())))
         
         return
 

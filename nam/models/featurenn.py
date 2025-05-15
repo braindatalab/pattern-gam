@@ -15,7 +15,7 @@ class FeatureNN(torch.nn.Module):
         num_units: int,
         dropout: float,
         hidden_sizes: list = [64, 32],
-        activation: str = 'relu'
+        activation: str = 'exu'
     ) -> None:
         """Initializes FeatureNN hyperparameters.
 
@@ -72,7 +72,7 @@ class InteractionNN(torch.nn.Module):
         num_units: int,
         dropout: float,
         hidden_sizes: list = [64, 32],
-        activation: str = 'relu'
+        activation: str = 'exu'
     ) -> None:
         """Initializes InteractionNN hyperparameters.
 
@@ -132,7 +132,7 @@ class MultiFeatureNN(torch.nn.Module):
         num_tasks: int,
         dropout: float,
         hidden_sizes: list = [64, 32],
-        activation: str = 'relu'
+        activation: str = 'exu'
     ) -> None:
         """Initializes FeatureNN hyperparameters.
         Args:

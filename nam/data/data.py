@@ -10,7 +10,8 @@ class NAMDataset(torch.utils.data.Dataset):
     def __init__(self,
                  X: Union[ArrayLike, pd.DataFrame],
                  y: Union[ArrayLike, pd.DataFrame],
-                 w: Union[ArrayLike, pd.DataFrame] = None):
+                 w: Union[ArrayLike, pd.DataFrame] = None,
+                 device: str = 'cpu'):
         """Dataset for NAMs that handles default weights.
 
         Args:
@@ -22,9 +23,16 @@ class NAMDataset(torch.utils.data.Dataset):
             X = X.to_numpy()
         if isinstance(y, (pd.DataFrame, pd.Series)):
             y = y.to_numpy()
-            
-        self.X = torch.tensor(X, requires_grad=False, dtype=torch.float)
-        self.y = torch.tensor(y, requires_grad=False, dtype=torch.float)
+
+        if not isinstance(X, torch.Tensor):
+            self.X = torch.tensor(X, requires_grad=False, dtype=torch.float)
+        else:
+            self.X = X
+
+        if not isinstance(y, torch.Tensor):
+            self.y = torch.tensor(y, requires_grad=False, dtype=torch.float)
+        else:
+            self.y = y
 
         if not w:
             self.w = torch.clone(self.y)
@@ -42,6 +50,10 @@ class NAMDataset(torch.utils.data.Dataset):
             # Create task dimension in single task setting for consistency.
             self.y = self.y.unsqueeze(1)
             self.w = self.w.unsqueeze(1)
+        
+        self.X = self.X.to(torch.device(device))
+        self.y = self.y.to(torch.device(device))
+        self.w = self.w.to(torch.device(device))
 
     def __len__(self):
         return len(self.X)

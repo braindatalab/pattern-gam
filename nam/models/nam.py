@@ -16,7 +16,7 @@ class NAM(torch.nn.Module):
         hidden_sizes: list,
         dropout: float,
         feature_dropout: float,
-        activation: str = 'relu',
+        activation: str = 'exu',
         interaction_pairs: list = None
     ) -> None:
         super(NAM, self).__init__()
@@ -116,7 +116,7 @@ class MultiTaskNAM(torch.nn.Module):
         hidden_sizes: list,
         dropout: float,
         feature_dropout: float,
-        activation: str = 'relu',
+        activation: str = 'exu',
     ) -> None:
         super(MultiTaskNAM, self).__init__()
 

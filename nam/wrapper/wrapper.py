@@ -126,7 +126,7 @@ class NAMBase:
         # self._preprocessor = MinMaxScaler(feature_range = (-1, 1))
 
         # dataset = NAMDataset(self._preprocessor.fit_transform(X), y, w)
-        dataset = NAMDataset(X, y, w)
+        dataset = NAMDataset(X, y, w, device=self.device)
 
         self.criterion = make_penalized_loss_func(self.loss_func, 
             self.regression, self.output_reg, self.l2_reg)
@@ -172,7 +172,8 @@ class NAMBase:
         if isinstance(X, pd.DataFrame):
             X = X.to_numpy()
         # X = self._preprocessor.transform(X)
-        X = torch.tensor(X, requires_grad=False, dtype=torch.float)
+        if not isinstance(X, torch.Tensor):
+            X = torch.tensor(X, requires_grad=False, dtype=torch.float)
         predictions = np.zeros((X.shape[0], self.num_tasks))
 
         for model in self.models:
@@ -290,6 +291,12 @@ class NAMClassifier(NAMBase):
             y = y.to_numpy()
         if isinstance(w, (pd.DataFrame, pd.Series)):
             w = w.to_numpy()
+
+        if isinstance(y, torch.Tensor):
+            y = y.cpu().detach().numpy()
+
+        if isinstance(X, torch.Tensor):
+            X = X.cpu().detach().numpy()
             
         if len(np.unique(y[~np.isnan(y)])) > 2:
             raise ValueError('More than two unique y-values detected. Multiclass classification not currently supported.')
