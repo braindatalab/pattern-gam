@@ -1,4 +1,4 @@
-# Pattern-GAM
+# PatternGAM
 
 Code for the "Correcting misinterpretations of additive models", accepted to NeurIPS 2025: https://openreview.net/forum?id=2ClM0g9OFT.
 
