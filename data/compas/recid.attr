@@ -1,0 +1,7 @@
+age: cont
+race: cont
+sex: cont
+priors_count: cont
+length_of_stay: cont
+c_charge_degree: cont
+two_year_recid: {0,1} (class)

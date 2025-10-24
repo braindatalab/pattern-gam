@@ -172,3 +172,15 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Saved experimental artifacts
+*.pkl
+*.pickle
+*.pt
+*.pth
+*.csv*
+*.png
+figures/*.png
+
+.DS_Store
+*.DS_Store
