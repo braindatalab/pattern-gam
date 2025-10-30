@@ -1,6 +1,6 @@
-# Pattern-GAM
+# PatternGAM
 
-Code for the "Correcting misinterpretations of additive models", accepted to NeurIPS 2025: https://openreview.net/forum?id=2ClM0g9OFT.
+Code for the paper "Correcting misinterpretations of additive models", accepted to NeurIPS 2025: https://openreview.net/forum?id=2ClM0g9OFT.
 
 
 The `./nam/` subfolder is adapted from [lemeln/nam](https://github.com/lemeln/nam).
